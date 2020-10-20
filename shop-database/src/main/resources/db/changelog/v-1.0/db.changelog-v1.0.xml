@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+    
+    <changeSet id="2" author="jonathanovich">
+        <sqlFile stripComments="true"
+                 splitStatements="true"
+                 relativeToChangelogFile="true"
+                 path="01-create-user-and-role-tables.sql"
+                 endDelimiter="\nGO"
+                 encoding="utf8"
+                 dbms="mysql"/>
+        <rollback>
+            <sqlFile stripComments="true"
+                     splitStatements="true"
+                     relativeToChangelogFile="true"
+                     path="01-drop-user-and-role-tables.sql"
+                     endDelimiter="\nGO"
+                     encoding="utf8"
+                     dbms="mysql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="3" author="jonathanovich">
+        <sqlFile stripComments="true"
+                 splitStatements="true"
+                 relativeToChangelogFile="true"
+                 path="01-insert-default-users.sql"
+                 endDelimiter="\nGO"
+                 encoding="utf8"
+                 dbms="mysql"/>
+    </changeSet>
+    
+</databaseChangeLog>
