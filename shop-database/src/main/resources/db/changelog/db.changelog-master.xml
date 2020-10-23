@@ -19,5 +19,19 @@
     <changeSet id="10" author="jonathanovich">
         <tagDatabase tag="v1.0"/>
     </changeSet>
+
+    <include file="v-2.0/db.changelog-v2.0.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="20" author="jonathanovich">
+        <tagDatabase tag="v2.0"/>
+    </changeSet>
+
+    <include file="v-3.0/db.changelog-v3.0.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="30" author="jonathanovich">
+        <tagDatabase tag="v3.0"/>
+    </changeSet>
+
+
     
 </databaseChangeLog>
