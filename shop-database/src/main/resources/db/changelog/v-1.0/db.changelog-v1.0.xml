@@ -32,6 +32,7 @@
                  endDelimiter="\nGO"
                  encoding="utf8"
                  dbms="mysql"/>
+        <rollback/>
     </changeSet>
     
 </databaseChangeLog>

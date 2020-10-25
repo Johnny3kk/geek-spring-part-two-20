@@ -12,7 +12,7 @@ public class User {
     private Long id;
 
     @Column(length = 32, nullable = false)
-    private String name;
+    private String login;
 
     @Column(length = 128, nullable = false)
     private String password;
@@ -34,7 +34,7 @@ public class User {
 
     public User(Long id, String name, String password) {
         this.id = id;
-        this.name = name;
+        this.login = name;
         this.password = password;
     }
 
@@ -46,12 +46,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
