@@ -1,4 +1,4 @@
-INSERT INTO `users` (`name`, `password`)
+INSERT INTO `users` (`login`, `password`)
 VALUE   ('admin', '$2y$12$R0sxrjCYiD2syiOClXtgReaYOmQoSHMeNgZL5ruDoQqs0uHMvIfU6'),
         ('guest', '$2y$12$R0sxrjCYiD2syiOClXtgReaYOmQoSHMeNgZL5ruDoQqs0uHMvIfU6');
 GO

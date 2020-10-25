@@ -64,12 +64,13 @@ public class SecurityConfiguration {
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
                     .antMatchers("/").anonymous()
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/user/**").hasRole("ADMIN")
                     .antMatchers("/product/**").hasAnyRole("ADMIN", "MANAGER")
                     .antMatchers("/my_products/**").hasRole("USER")
                     .and()
-                    .formLogin()
-                        .loginPage("/login");
+                    .formLogin();
+//                        .loginPage("/login");
         }
     }
 }
