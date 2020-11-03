@@ -13,64 +13,51 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.geekbrains.repo.UserRepository;
 
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private PasswordEncoder passwordEncoder;
+
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    public void authConfigure(AuthenticationManagerBuilder auth,
-                              UserDetailsService userAuthService,
-                              PasswordEncoder passwordEncoder) throws Exception {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userAuthService);
-        provider.setPasswordEncoder(passwordEncoder);
-        auth.authenticationProvider(provider);
-        auth.inMemoryAuthentication()
-                .withUser("mem_admin_user")
-                .password(passwordEncoder.encode("password"))
-                .roles("ADMIN");
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Bean
-    public UserDetailsService userAuthService(UserRepository userRepository) {
-        return new UserAuthService(userRepository);
+    @Autowired
+    public void setUserDetailsService(UserDetailsService userAuthService) {
+        this.userDetailsService = userAuthService;
     }
 
-    /*@Configuration
-    @Order(1)
-    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                    .antMatchers("/api/**").hasRole("ADMIN")
-                    .and()
-                    .httpBasic()
-                    .authenticationEntryPoint((req, resp, exception) -> {
-                        resp.setContentType("application/json");
-                        resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        resp.setCharacterEncoding("UTF-8");
-                        resp.getWriter().println("{ \"error\": \"" + exception.getMessage() + "\" }");
-                    })
-                    .and()
-                    .csrf().disable()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        }
-    }*/
-
-    @Configuration
-    public static class UiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                    .antMatchers("/").anonymous()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/user/**").hasRole("ADMIN")
-                    .antMatchers("/product/**").hasAnyRole("ADMIN", "MANAGER")
-                    .antMatchers("/my_products/**").hasRole("USER")
-                    .and()
-                    .formLogin();
-//                        .loginPage("/login");
-        }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/css/*").permitAll()
+                .antMatchers("/js/*").permitAll()
+                .antMatchers("/webfonts/*").permitAll()
+                .antMatchers("/**").authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login")
+                .permitAll();
+    }
+
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userDetailsService);
+        auth.setPasswordEncoder(passwordEncoder);
+        return auth;
+    }
+
 }
