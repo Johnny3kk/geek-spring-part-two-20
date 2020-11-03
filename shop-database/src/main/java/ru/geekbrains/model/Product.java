@@ -1,58 +1,86 @@
 package ru.geekbrains.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    private Long id;
 
-    @Column
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column
-    private BigDecimal cost;
+    @Column(name = "price")
+    private BigDecimal price;
 
-    @ManyToOne
-    private Brand brand;
-
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Category category;
 
+    @ManyToOne(optional = false)
+    private Brand brand;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+    @JoinTable(name = "products_pictures",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "picture_id"))
+    private List<Picture> pictures;
+
     public Product() {
+
     }
 
-    public Product(int id, String title, BigDecimal cost) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getName() {
+        return name;
     }
 
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }

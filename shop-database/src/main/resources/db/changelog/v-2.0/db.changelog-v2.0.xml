@@ -4,35 +4,24 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
-    
-    <changeSet id="11" author="jonathanovich">
-        <sqlFile stripComments="true"
-                 splitStatements="true"
-                 relativeToChangelogFile="true"
-                 path="01-create-product-table.sql"
-                 endDelimiter="\nGO"
-                 encoding="utf8"
-                 dbms="mysql"/>
-        <rollback>
-            <sqlFile stripComments="true"
-                     splitStatements="true"
-                     relativeToChangelogFile="true"
-                     path="01-drop-product-table.sql"
-                     endDelimiter="\nGO"
-                     encoding="utf8"
-                     dbms="mysql"/>
-        </rollback>
-    </changeSet>
 
-    <changeSet id="12" author="jonathanovich">
-        <sqlFile stripComments="true"
-                 splitStatements="true"
-                 relativeToChangelogFile="true"
-                 path="01-insert-default-products.sql"
-                 endDelimiter="\nGO"
+    <changeSet id="20" author="jonathanovich">
+        <sqlFile dbms="mysql"
                  encoding="utf8"
-                 dbms="mysql"/>
-        <rollback/>
+                 endDelimiter="\nGO"
+                 path="01-create-product-related-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+        <rollback>
+            <sqlFile dbms="mysql"
+                     encoding="utf8"
+                     endDelimiter="\nGO"
+                     path="01-drop-product-related-tables.sql"
+                     relativeToChangelogFile="true"
+                     splitStatements="true"
+                     stripComments="true"/>
+        </rollback>
     </changeSet>
     
 </databaseChangeLog>
