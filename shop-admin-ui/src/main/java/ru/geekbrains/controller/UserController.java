@@ -76,9 +76,4 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/roles")
-    public String adminRolesPage(Model model) {
-        model.addAttribute("activePage", "Roles");
-        return "index";
-    }
 }
