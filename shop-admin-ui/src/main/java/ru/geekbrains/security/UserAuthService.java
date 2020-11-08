@@ -7,12 +7,17 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.model.Role;
 import ru.geekbrains.repo.UserRepository;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional(readOnly = true)
 public class UserAuthService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -28,11 +33,12 @@ public class UserAuthService implements UserDetailsService {
                 .map(user -> new User(
                         user.getName(),
                         user.getPassword(),
-                        mapRolesToAuthorities(user.getRoles())))
+                        Collections.singletonList(new SimpleGrantedAuthority("USER"))))
+//                        mapRolesToAuthorities(user.getRoles())))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
-    }
+//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+//        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+//    }
 }

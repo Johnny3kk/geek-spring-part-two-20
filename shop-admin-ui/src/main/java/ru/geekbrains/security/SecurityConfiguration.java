@@ -13,11 +13,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.geekbrains.repo.UserRepository;
 
 @EnableWebSecurity
+@Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private PasswordEncoder passwordEncoder;
 
     private UserDetailsService userDetailsService;
+
+//    @Autowired
+//    public void authConfigure(AuthenticationManagerBuilder auth,
+//                              UserDetailsService userAuthService,
+//                              PasswordEncoder passwordEncoder) throws Exception {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setUserDetailsService(userAuthService);
+//        provider.setPasswordEncoder(passwordEncoder);
+//        auth.authenticationProvider(provider);
+//        auth.inMemoryAuthentication()
+//                .withUser("mem_admin_user")
+//                .password(passwordEncoder.encode("password"))
+//                .roles("ADMIN");
+//    }
+//
+//    @Bean
+//    public UserDetailsService userAuthService(UserRepository userRepository) {
+//        return new UserAuthService(userRepository);
+//    }
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
