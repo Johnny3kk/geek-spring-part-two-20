@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -19,6 +20,12 @@ public class Role implements Serializable {
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "roles_authorities",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<Authority> authorities;
 
     public Role() {
     }
@@ -49,6 +56,14 @@ public class Role implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override

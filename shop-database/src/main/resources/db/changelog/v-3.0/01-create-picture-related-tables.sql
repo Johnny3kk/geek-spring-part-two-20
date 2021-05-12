@@ -1,6 +1,7 @@
 CREATE TABLE `pictures_data` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `data` longblob NOT NULL,
+  `file_name` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 GO
