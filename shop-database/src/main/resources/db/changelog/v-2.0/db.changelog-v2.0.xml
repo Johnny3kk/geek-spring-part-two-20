@@ -13,6 +13,13 @@
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"/>
+        <sqlFile dbms="mysql"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 path="01-insert-product-related-tables.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
         <rollback>
             <sqlFile dbms="mysql"
                      encoding="utf8"
