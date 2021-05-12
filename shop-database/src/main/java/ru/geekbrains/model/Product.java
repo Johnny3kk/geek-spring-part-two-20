@@ -20,10 +20,13 @@ public class Product implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne(optional = false)
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne
     private Category category;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Brand brand;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
@@ -83,4 +86,13 @@ public class Product implements Serializable {
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }
