@@ -3,6 +3,7 @@ package ru.geekbrains.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ru.geekbrains.model.Picture;
 import ru.geekbrains.model.PictureData;
 import ru.geekbrains.repo.PictureRepository;
@@ -14,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.UUID;
-
 
 public class PictureServiceFileImpl implements PictureService {
 
