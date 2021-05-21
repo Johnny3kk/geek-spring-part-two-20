@@ -23,6 +23,6 @@ CREATE TABLE `products_pictures` (
   KEY `FKh3amnci4cl7xcl1al140xw79e` (`product_id`),
   KEY `FKloucf8ggy74nmdej2jmvttvi4` (`picture_id`),
   CONSTRAINT `FKh3amnci4cl7xcl1al140xw79e` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  CONSTRAINT `FKloucf8ggy74nmdej2jmvttvi4` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`)
+  CONSTRAINT `FKloucf8ggy74nmdej2jmvttvi4` FOREIGN KEY (`picture_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB
 GO
