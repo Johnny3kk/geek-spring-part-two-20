@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.model.Picture;
 import ru.geekbrains.model.PictureData;
 import ru.geekbrains.repo.PictureRepository;
@@ -62,5 +63,11 @@ public class PictureServiceFileImpl implements PictureService {
         }
 
         return new PictureData(fileName);
+    }
+
+    @Override
+    @Transactional
+    public void deletePictureById(long pictureId) {
+        pictureRepository.deleteById(pictureId);
     }
 }
