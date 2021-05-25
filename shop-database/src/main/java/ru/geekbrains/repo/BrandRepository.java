@@ -6,4 +6,7 @@ import ru.geekbrains.model.Brand;
 
 @Repository
 public interface BrandRepository extends JpaRepository<Brand, Long> {
+
+    Brand findBrandByName(String name);
+
 }

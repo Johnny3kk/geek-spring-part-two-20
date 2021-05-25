@@ -1,6 +1,6 @@
 package ru.geekbrains.service;
 
-import ru.geekbrains.controller.repr.ProductRepr;
+import ru.geekbrains.repr.ProductRepr;
 
 import java.io.IOException;
 import java.util.List;

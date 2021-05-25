@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.controller.repr.ProductRepr;
 import ru.geekbrains.exceptions.NotFoundException;
 import ru.geekbrains.model.Picture;
 import ru.geekbrains.model.Product;
+import ru.geekbrains.repo.BrandRepository;
+import ru.geekbrains.repo.CategoryRepository;
 import ru.geekbrains.repo.ProductRepository;
+import ru.geekbrains.repr.ProductRepr;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -26,11 +28,15 @@ public class ProductServiceImpl implements ProductService, Serializable {
 
     private final ProductRepository productRepository;
     private final PictureService pictureService;
+    private final CategoryRepository categoryRepository;
+    private final BrandRepository brandRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, PictureService pictureService) {
+    public ProductServiceImpl(ProductRepository productRepository, PictureService pictureService, CategoryRepository categoryRepository, BrandRepository brandRepository) {
         this.productRepository = productRepository;
         this.pictureService = pictureService;
+        this.categoryRepository = categoryRepository;
+        this.brandRepository = brandRepository;
     }
 
     @Override
@@ -59,9 +65,10 @@ public class ProductServiceImpl implements ProductService, Serializable {
         Product product = (productRepr.getId() != null) ? productRepository.findById(productRepr.getId())
                 .orElseThrow(NotFoundException::new) : new Product();
         product.setName(productRepr.getName());
-        product.setCategory(productRepr.getCategory());
-        product.setBrand(productRepr.getBrand());
+        product.setCategory(categoryRepository.findCategoryByName(productRepr.getCategory()));
+        product.setBrand(brandRepository.findBrandByName(productRepr.getBrand()));
         product.setPrice(productRepr.getPrice());
+        product.setDescription(productRepr.getDescription());
         if (productRepr.getNewPictures() != null) {
             for (MultipartFile newPicture : productRepr.getNewPictures()) {
                 logger.info("Product {} file {} size {}", product.getId(),

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.geekbrains.controller.repr.ProductRepr;
 import ru.geekbrains.exceptions.NotFoundException;
 import ru.geekbrains.repo.BrandRepository;
 import ru.geekbrains.repo.CategoryRepository;
+import ru.geekbrains.repr.ProductRepr;
+import ru.geekbrains.service.BrandService;
+import ru.geekbrains.service.CategoryService;
 import ru.geekbrains.service.ProductService;
 
 
@@ -23,17 +25,14 @@ public class ProductsController {
     private static final Logger logger = LoggerFactory.getLogger(ProductsController.class);
 
     private final ProductService productService;
-
-    private final CategoryRepository categoryRepository;
-
-    private final BrandRepository brandRepository;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
 
     @Autowired
-    public ProductsController(ProductService productService, CategoryRepository categoryRepository,
-                              BrandRepository brandRepository) {
+    public ProductsController(ProductService productService, CategoryService categoryService, BrandService brandService) {
         this.productService = productService;
-        this.categoryRepository = categoryRepository;
-        this.brandRepository = brandRepository;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
     }
 
     @GetMapping("/products")
@@ -48,8 +47,8 @@ public class ProductsController {
         model.addAttribute("edit", true);
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", productService.findById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("brands", brandRepository.findAll());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
         return "product_form";
     }
 
@@ -65,8 +64,8 @@ public class ProductsController {
         model.addAttribute("create", true);
         model.addAttribute("activePage", "Products");
         model.addAttribute("product", new ProductRepr());
-        model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("brands", brandRepository.findAll());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
         return "product_form";
     }
 
