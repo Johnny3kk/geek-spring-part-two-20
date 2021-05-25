@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<section class="categories" th:fragment="carousel">
+    <div class="container">
+        <div class="row">
+            <div class="categories__slider owl-carousel" th:list="${categories}">
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS8.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[0].id})}" th:text="${categories[0].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS1.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[1].id})}" th:text="${categories[1].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS3.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[2].id})}" th:text="${categories[2].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS10.png}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[3].id})}" th:text="${categories[3].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS2.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[4].id})}" th:text="${categories[4].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS5.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[2].id})}" th:text="${categories[2].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS7.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[4].id})}" th:text="${categories[4].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS9.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[0].id})}" th:text="${categories[0].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS6.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[2].id})}" th:text="${categories[2].name}"></a></h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="categories__item set-bg" th:data-setbg="@{/img/gs/_GS11.jpg}">
+                        <h5><a th:href="@{/shop/{id}(id=${categories[1].id})}" th:text="${categories[1].name}"></a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section End -->
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- Hero Section Begin -->
+<section class="hero" th:fragment="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars" style="color: #e9e9e9"></i>
+                        <span style="color: #e9e9e9">All categories</span>
+                    </div>
+                    <ul>
+                        <li th:each="cat : ${categories}"><a th:href="@{/shop/{id}(id=${cat.id})}" th:text="${cat.name}"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__item set-bg" th:data-setbg="@{/img/gs/_GS4.jpg}">
+                    <div class="hero__text">
+                        <span style="color: #e9e9e9">GUITAR FRESH</span>
+                        <h2 style="color: #e9e9e9">100% Electric <br />100% Organic</h2>
+                        <p style="color: #e9e9e9">Free Pickup and Delivery Available</p>
+                        <a href="#products" class="primary-btn">SHOP NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+</html>

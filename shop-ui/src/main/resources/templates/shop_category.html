@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-
 <head th:replace="fragments/header :: head"></head><!--/head-->
 
 <body>
@@ -13,11 +12,19 @@
 
     <header id="header" th:replace="fragments/header :: header"></header><!--header-->
 
-    <section class="hero" th:replace="fragments/hero :: hero"></section><!-- Hero Section-->
+    <section class="featured spad" th:data="category">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Гитаршопная Категория <span th:text="${category.name}"></span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <section class="categories" th:replace="fragments/carousel :: carousel"></section><!-- Categories Section-->
-
-    <section class="featured spad" th:replace="fragments/product :: product"></section><!-- Featured Section-->
+    <section class="featured spad" th:replace="fragments/product :: product"></section>
 
     <footer class="footer spad" th:replace="fragments/footer :: footer"></footer><!-- Footer Section-->
 
@@ -32,5 +39,4 @@
     <script th:src="@{/js/main.js}"></script>
 
 </body>
-
 </html>
