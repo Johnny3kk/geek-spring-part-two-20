@@ -34,8 +34,8 @@
                     <tr th:each="prod : ${products}">
                         <td th:text="${prod.id}"></td>
                         <td th:text="${prod.name}"></td>
-                        <td th:text="${prod.category.name}"></td>
-                        <td th:text="${prod.brand.name}"></td>
+                        <td th:text="${prod.category}"></td>
+                        <td th:text="${prod.brand}"></td>
                         <td th:text="${prod.price}"></td>
                         <td>
                             <a th:href="@{/product/{id}/edit(id=${prod.id})}" class="btn btn-icon btn-pill btn-primary"
