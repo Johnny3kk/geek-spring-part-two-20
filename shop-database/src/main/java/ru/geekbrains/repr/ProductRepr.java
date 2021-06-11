@@ -1,8 +1,6 @@
 package ru.geekbrains.repr;
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.model.Brand;
-import ru.geekbrains.model.Category;
 import ru.geekbrains.model.Product;
 
 import java.io.Serializable;
