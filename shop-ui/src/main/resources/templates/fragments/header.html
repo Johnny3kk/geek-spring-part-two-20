@@ -59,7 +59,7 @@
             <div class="col-lg-3">
                 <div class="header__logo">
                     <a th:href="@{/shop}">
-                        <h3 >ГИТАРШОП</h3>
+                        <h3>ГИТАРШОП</h3>
                     </a>
                 </div>
             </div>
@@ -73,10 +73,9 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a th:href="@{/cart}" th:method="get"><i style="color: #e9e9e9" class="fa fa-shopping-bag"></i></a></li>
                     </ul>
-                    <div class="header__cart__price">item: <span>$150.00</span></div>
+                    <div class="header__cart__price">item: <span>$$$</span></div>
                 </div>
             </div>
         </div>

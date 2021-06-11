@@ -19,8 +19,24 @@
                     <div class="section-title">
                         <h2>Гитаршопная Витрина с <span th:text="${product.name}"></span></h2>
                     </div>
+                    <div class="section-title">
+                        <form th:action="@{/cart/add}" th:method="post">
+                            <input type="hidden" name="qty" value="1"/>
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                                <button style="background-color: #7fad39">
+                                    <i class="fa fa-shopping-cart"><h4 style="color: #e9e9e9">Бросить в корзину</h4></i>
+                                </button>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <br>
+            <div class="card-columns" style="column-count: 3">
+                <div class="card" th:each="pict : ${product.pictures}">
+                    <img class="card-img-bottom" th:src="@{/picture/{pictureId}(pictureId=${pict.id})}" width="40%"/>
+                </div>
+            </div>
+            <br>
             <div class="row">
                 <div class="col-12" style="color: #e9e9e9">
                     <div>Title:</div>
@@ -28,7 +44,7 @@
                     <br>
                     <div>Cost:</div>
                     <div>
-                        <p><span th:text="${product.price}"></span> bucks</p>
+                        <p style="color: #e9e9e9"><span th:text="${product.price}"></span> bucks</p>
                     </div>
                     <br>
                     <div>Brand:</div>
@@ -39,14 +55,9 @@
                     <br>
                     <div>Description:</div>
                     <div th:text="${product.description}"></div>
-                    <br>
                 </div>
             </div>
-            <div class="card-columns" style="column-count: 3">
-                <div class="card" th:each="pict : ${product.pictures}">
-                    <img class="card-img-bottom" th:src="@{/picture/{pictureId}(pictureId=${pict.id})}" width="40%"/>
-                </div>
-            </div>
+
     </section>
 
     <footer class="footer spad" th:replace="fragments/footer :: footer"></footer><!-- Footer Section-->

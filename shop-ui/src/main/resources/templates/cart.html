@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/header :: head"></head><!--/head-->
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<header id="header" th:replace="fragments/header :: header"></header><!--header-->
+<section class="featured spad">
+<section class="featured spad">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li class="active"><h4>Shopping Cart</h4></li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu" style="color: #e9e9e9">
+                    <td class="image">Item</td>
+                    <td class="description"></td>
+                    <td class="price">Price</td>
+                    <td class="quantity">Quantity</td>
+                    <td class="total">Total</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="lineItem : ${lineItems}">
+                    <td class="cart_product" width="20%">
+                        <a href="">
+                            <img th:src="@{/picture/{pictureId}(pictureId=${lineItem.productRepr.getPictures().get(0).getId()})}"
+                                 alt=""/>
+                        </a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="" th:text="${lineItem.productRepr.name}"></a></h4>
+                        <p>Web ID: [[${lineItem.productRepr.id}]]</p>
+                    </td>
+                    <td class="cart_price">
+                        <p>$[[${lineItem.productRepr.price}]]</p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            <a class="cart_quantity_up" th:href="@{/cart/increase/{id}/{qty}(id=${lineItem.productId}, qty=${lineItem.qty})}"> + </a>
+                            <input class="cart_quantity_input" type="text" name="quantity" th:value="${lineItem.qty}"
+                                   autocomplete="off" size="2" style="text-align: center">
+                            <a class="cart_quantity_down" th:href="@{/cart/decrease/{id}/{qty}(id=${lineItem.productId}, qty=${lineItem.qty})}"> - </a>
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price">$[[${lineItem.total}]]</p>
+                    </td>
+                    <td class="cart_delete">
+                        <form th:action="@{/cart}" th:method="delete">
+                            <input type="hidden" name="productId" th:value="${lineItem.productId}" />
+                            <button type="submit" class="cart_quantity_delete">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section><!--/#cart_items-->
+
+<footer class="footer spad" th:replace="fragments/footer :: footer"></footer><!-- Footer Section-->
+
+</section>
+
+<!-- Js Plugins -->
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/mixitup.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
