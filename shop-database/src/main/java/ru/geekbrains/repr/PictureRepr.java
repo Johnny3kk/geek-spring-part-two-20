@@ -12,6 +12,9 @@ public class PictureRepr implements Serializable {
 
     private String contentType;
 
+    public PictureRepr() {
+    }
+
     public PictureRepr(Picture picture) {
         this.id = picture.getId();
         this.name = picture.getName();
