@@ -19,26 +19,31 @@ public class CartServiceProxy implements CartService {
 
     @Override
     public void removeProductQty(ProductRepr productRepr, int qty) {
-
+        CartService cartService = (CartService) httpSession.getAttribute("cartService");
+        cartService.removeProductQty(productRepr, qty);
     }
 
     @Override
     public void removeProduct(LineItem lineItem) {
-
+        CartService cartService = (CartService) httpSession.getAttribute("cartService");
+        cartService.removeProduct(lineItem);
     }
 
     @Override
     public List<LineItem> getLineItems() {
-        return null;
+        CartService cartService = (CartService) httpSession.getAttribute("cartService");
+        return cartService.getLineItems();
     }
 
     @Override
     public BigDecimal getSubTotal() {
-        return null;
+        CartService cartService = (CartService) httpSession.getAttribute("cartService");
+        return cartService.getSubTotal();
     }
 
     @Override
     public void updateCart(LineItem lineItem) {
-
+        CartService cartService = (CartService) httpSession.getAttribute("cartService");
+        cartService.updateCart(lineItem);
     }
 }
