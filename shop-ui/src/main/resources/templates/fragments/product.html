@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-4" th:each="prod : ${products}">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" th:data-setbg="@{/picture/{pictureId}(pictureId=${prod.getPictures().get(0).getId()})}">
+                    <div class="featured__item__pic set-bg" th:data-setbg="@{{pictureServiceUrl}/picture/{pictureId}(pictureId=${prod.getPictures().get(0).getId()}, pictureServiceUrl=${pictureServiceUrl})}">
                         <form th:action="@{/cart/add}" th:method="post">
                             <input type="hidden" name="qty" value="1"/>
                             <input type="hidden" name="productId" th:value="${prod.id}">
