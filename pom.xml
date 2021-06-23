@@ -31,6 +31,7 @@
         <module>spring-eureka</module>
         <module>spring-gateway</module>
         <module>shop-picture-service-app</module>
+        <module>spring-integration-demo</module>
     </modules>
 
 
