@@ -23,7 +23,10 @@ public class Category implements Serializable {
     private List<Product> products;
 
     public Category() {
+    }
 
+    public Category(String name) {
+        this.name = name;
     }
 
     public Long getId() {
