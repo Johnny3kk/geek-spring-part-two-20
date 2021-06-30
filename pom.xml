@@ -32,6 +32,7 @@
         <module>spring-gateway</module>
         <module>shop-picture-service-app</module>
         <module>spring-integration-demo</module>
+        <module>spring-boot-chat</module>
     </modules>
 
 
