@@ -33,7 +33,7 @@
             <br>
             <div class="card-columns" style="column-count: 3">
                 <div class="card" th:each="pict : ${product.pictures}">
-                    <img class="card-img-bottom" th:src="@{/picture/{pictureId}(pictureId=${pict.id})}" width="40%"/>
+                    <img class="card-img-bottom" th:src="@{{pictureServiceUrl}/picture/{pictureId}(pictureId=${pict.id}, pictureServiceUrl=${pictureServiceUrl})}" width="40%"/>
                 </div>
             </div>
             <br>
